@@ -1,44 +1,38 @@
 <template>
   <div id="app">
-    <button
-      class="JS-add-tasks-group btn btn--light"
-      @click="addTasksGroup()">
+    <button class="JS-add-tasks-group btn btn--light" @click="addTasksGroup()">
       add tasks group
     </button>
 
     <div class="container">
-
-      <div 
-        v-for="tasksGroup in tasksGroups">
-
+      <div v-for="(tasksGroup, index) in tasksGroups" v-bind:key="index">
         <tasks-group
           v-if="!tasksGroup.deleted"
-          @delete="deleteTasksGroup(tasksGroup)">
+          @delete="deleteTasksGroup(tasksGroup)"
+        >
         </tasks-group>
       </div>
-
     </div>
   </div>
 </template>
 
 <script>
-import TasksGroup from './components/TasksGroup';
-import Vue from 'vue';
+import TasksGroup from "./components/TasksGroup";
 
 export default {
-  name: 'app',
-  data : function(){
+  name: "app",
+  data: function() {
     return {
       tasksGroups: []
-    }
+    };
   },
   methods: {
     /**
      * Add a new tasksGroup
      * Set the property {deleted} to false
      */
-    addTasksGroup: function(){
-      this.tasksGroups.push({deleted: false});
+    addTasksGroup: function() {
+      this.tasksGroups.push({ deleted: false });
     },
 
     /**
@@ -46,14 +40,14 @@ export default {
      * @param  {Object} tasksGroup The tasksGroup to delete
      * @return {Void}
      */
-    deleteTasksGroup: function(tasksGroup){
+    deleteTasksGroup: function(tasksGroup) {
       tasksGroup.deleted = true;
-    },
+    }
   },
   components: {
     TasksGroup
   }
-}
+};
 </script>
 
 <style>
@@ -68,7 +62,9 @@ body {
   font-size: 17px;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 .container {
   position: relative;
@@ -89,11 +85,13 @@ body {
   color: #afafb9;
 
   cursor: pointer;
-  transition: all .2s;
+  transition: all 0.2s;
   outline: none;
 }
 
-.btn--light { background-color: white; }
+.btn--light {
+  background-color: white;
+}
 
 .btn--warning {
   color: #a26a6a;
